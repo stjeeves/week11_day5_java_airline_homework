@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Flight {
 
-    private ArrayList<Passenger> passengers;
+    ArrayList<Passenger> passengers;
     private Plane plane;
     private String flightNum;
     private String destination;
@@ -43,7 +43,17 @@ public class Flight {
 
     //return seats method
     public int getAvailableSeats() {
-        return this.plane.planeType.getCapacity();
+        return (this.plane.planeType.getCapacity()) - (this.passengers.size());
         //need to add in way to check this against the passengers array
+    }
+
+    public void addPassengerToFlight(Passenger passenger) {
+        this.passengers.add(passenger);
+    }
+
+    public void BookSeat(Passenger passenger) {
+        if (this.getAvailableSeats() > 0) {
+            this.addPassengerToFlight(passenger);
+        }
     }
 }

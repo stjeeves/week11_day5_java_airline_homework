@@ -8,11 +8,13 @@ public class FlightTest {
     Flight flight;
     Plane plane;
     PlaneType planeType;
+    Passenger passenger;
 
     @Before
     public void before(){
         plane = new Plane(PlaneType.BOEING747);
         flight = new Flight(plane,"XX123","HKX","EDI","0900");
+        passenger = new Passenger("Jeff", 2);
     }
 
     @Test
@@ -36,8 +38,21 @@ public class FlightTest {
     }
 
     @Test
+    public void checkAddPassengerToFlight(){
+        flight.addPassengerToFlight(passenger);
+        assertEquals(1, flight.passengers.size());
+    }
+
+    @Test
     public void checkAvailableSeats(){
-        assertEquals(250, flight.getAvailableSeats());
+        flight.addPassengerToFlight(passenger);
+        assertEquals(249, flight.getAvailableSeats());
+    }
+
+    @Test
+    public void checkCanBookSeat(){
+        flight.BookSeat(passenger);
+        assertEquals(1, flight.passengers.size());
     }
 
 }
